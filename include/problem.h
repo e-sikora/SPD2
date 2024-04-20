@@ -89,6 +89,14 @@ public:
      * @param callback The function to measure time for.
      */
     void timeMeasure(std::function<void()> callback);
+
+    void pushBack(Item given_item){this->main_list.push_back(given_item);}
+
+    void listSizeIncrement(){this->list_size++;}
+
+    void listSizeZero(){this->list_size = 0;}
+
+    void mainListClear(){this->main_list.clear();}
 };
 
 // #ifdef ENABLE_DOCTEST_IN_LIBRARY

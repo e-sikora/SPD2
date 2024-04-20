@@ -27,4 +27,84 @@ void Instance<Problem>::setMachine(const Problem problem, int indx){
     problem_list[indx] = problem;
 }
 
+template<class Problem>
+void Instance<Problem>::divideTasks(std::vector<int> tasks, Problem loaded_problem){
+    int problem_amount = int(loaded_problem.getSize());
+
+
+    for(int i = 0; i < problem_amount; i++){
+        for(int j = 0; j < int(this->machines); j++){
+            if(tasks[i] == j){
+                this->problem_list[j].pushBack(loaded_problem.getItem(i));
+                this->problem_list[j].listSizeIncrement();
+            }
+        }
+    }
+
+}
+
+template<class Problem>
+void Instance<Problem>::clearInstance(){
+    for(size_t i = 0; i < this->machines; i++) {
+        this->problem_list[i].mainListClear();
+        this->problem_list[i].listSizeZero();
+    }
+}
+
+template<class Problem>
+void Instance<Problem>::displayMachinesResult(){
+    std::cout << "Best task allocation beetwen avaliable machines is:" << std::endl;
+    for(size_t i = 0; i < this->machines; i++){
+        std::cout << "Machine " << i+1 << " got following tasks:" << std::endl;
+        for(size_t j = 0; j < this->problem_list[i].getSize(); j++){
+            std::cout << this->problem_list[i].getItem(int(j)).getId() << " ";
+        
+        }
+        std::cout << std::endl;
+    }
+
+    std::cout << "Best work time in this order is: " << this->workTime() << std::endl;
+}
+
+template<class Problem>
+void Instance<Problem>::fullReview(Problem loaded_problem){
+    int problem_amount = int(loaded_problem.getSize()), counter = 0, best_work_time = 0, current_work_time = 0;
+
+    std::vector<int> modulo(problem_amount, 0);
+    std::vector<int> current_combination(problem_amount, 0);
+    std::vector<int> best_combination(problem_amount, 0);
+
+    for(int i = 0; i < problem_amount; i++) {
+        modulo[i] = std::pow(loaded_problem.getMachines(), i+1);
+    }
+    
+    for(int j = 0; j < std::pow(loaded_problem.getMachines(), problem_amount); j++) {
+        for(int k = 0; k < problem_amount; k++) {
+            if(counter%modulo[k] == 0 && current_combination[k] > 0) {
+                current_combination[k+1]++;
+                current_combination[k] = 0;
+            }
+        }
+
+        //TUTAJ TRZEBA WYWOŁAĆ FUNKCJĘ ROZDZIELAJĄCĄ I PÓŹNIEJ LICZĄCA CZAS
+
+        this->divideTasks(current_combination, loaded_problem);
+        current_work_time = this->workTime();
+        if(best_work_time > current_work_time || best_work_time == 0){
+            best_work_time = current_work_time;
+            best_combination = current_combination;
+        }
+
+        this->clearInstance();
+
+        counter++;
+        current_combination[0]++;
+    }
+
+    this->clearInstance();
+    this->divideTasks(best_combination, loaded_problem);
+    this->displayMachinesResult();
+}
+
+
 template class Instance<Problem<Item<int>>>;

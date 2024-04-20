@@ -14,7 +14,7 @@ set(CMAKE_C_COMPILER gcc)
 # Set project name, version and laguages here. (change as needed)
 # Version numbers are available by including "exampleConfig.h" in
 # the source. See exampleConfig.h for some more details.
-project(SPD1)
+project(SPD2)
 
 
 # Options: Things you can set via commandline options to cmake (e.g. -DENABLE_LTO=[ON|OFF])

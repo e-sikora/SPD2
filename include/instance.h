@@ -1,5 +1,7 @@
 #pragma once 
 
+#include <cmath>
+
 #include "problem.h"
 
 
@@ -19,4 +21,12 @@ int workTime();
 int getMachines();
 
 void setMachine(const Problem problem, int indx);
+
+void divideTasks(std::vector<int> tasks, Problem loaded_problem);
+
+void clearInstance();
+
+void displayMachinesResult();
+
+void fullReview(Problem loaded_problem);
 };

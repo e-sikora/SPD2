@@ -20,17 +20,21 @@ int main(int argc, char *argv[]) {
   Problem<Item<int>> problem;
   problem.loadFromFile(argv[1]);
 
-  std::cout << problem.getMachines() << std::endl;
+  //std::cout << problem.getMachines() << std::endl;
 
   Instance<Problem<Item<int>>> instance(problem.getMachines());
  
-std::cout << "jestem" << std::endl;
-  std::cout << instance.getMachines() << std::endl;
+  //std::cout << "jestem" << std::endl;
+  //std::cout << instance.getMachines() << std::endl;
 
-  instance.setMachine(problem, 0);
+  //instance.setMachine(problem, 0);
 
-  int work_time = instance.workTime();
-  std::cout << work_time << std::endl;
+  //int work_time = instance.workTime();
+  //std::cout << work_time << std::endl;
+
+  instance.fullReview(problem);
+
+
 
 
   return 0;

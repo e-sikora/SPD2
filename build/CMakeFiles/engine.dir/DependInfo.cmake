@@ -1,24 +1,16 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/eryk_sikora/SPD/SPD2/src/instance.cpp" "/home/eryk_sikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/instance.cpp.o"
-  "/home/eryk_sikora/SPD/SPD2/src/item.cpp" "/home/eryk_sikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/item.cpp.o"
-  "/home/eryk_sikora/SPD/SPD2/src/problem.cpp" "/home/eryk_sikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/problem.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "ENABLE_DOCTEST_IN_LIBRARY"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../include"
-  "_deps/doctest-src"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/esikora/SPD/SPD2/src/instance.cpp" "CMakeFiles/engine.dir/src/instance.cpp.o" "gcc" "CMakeFiles/engine.dir/src/instance.cpp.o.d"
+  "/home/esikora/SPD/SPD2/src/item.cpp" "CMakeFiles/engine.dir/src/item.cpp.o" "gcc" "CMakeFiles/engine.dir/src/item.cpp.o.d"
+  "/home/esikora/SPD/SPD2/src/problem.cpp" "CMakeFiles/engine.dir/src/problem.cpp.o" "gcc" "CMakeFiles/engine.dir/src/problem.cpp.o.d"
   )
 
 # Targets to which this target links.
