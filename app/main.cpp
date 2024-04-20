@@ -35,7 +35,10 @@ int main(int argc, char *argv[]) {
   instance.LSA(problem);
   instance.LPT(problem);
   instance.fullReview(problem);
-
+  if(problem.getMachines()==2) {
+    instance.dynamicProgramingTwoMachines(problem);
+  }
+  
 
 
 

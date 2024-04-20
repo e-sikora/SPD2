@@ -20,7 +20,7 @@ public:
     /**
    * @brief Default constructor initializing all attributes to zero.
    */
-    Item();
+    Item() : id(0), occur_time(0), work_time(0), idle_time(0) {}
 
     /**
      * @brief Parameterized constructor to initialize the item with provided values.
@@ -30,7 +30,12 @@ public:
      * @param work_time_s The work time required for the item.
      * @param idle_time_s The idle time associated with the item.
      */
-    Item(int id_s, int occur_time_s, int work_time_s, int idle_time_s);
+    Item(int id_s, int occur_time_s, int work_time_s, int idle_time_s){
+        id = id_s;
+        occur_time = occur_time_s;
+        work_time = work_time_s;
+        idle_time = idle_time_s;
+    }
 
     /**
      * @brief Getter method for the ID of the item.
@@ -88,7 +93,7 @@ public:
     * @return true If this item's ID is less than the other item's ID.
     * @return false Otherwise.
     */
-    bool operator<(const Item &other) const;
+    bool operator<(const Item &other) const {return id < other.id;}
 
     /**
    * @brief Compares two items based on their occurrence times.
@@ -120,12 +125,21 @@ public:
     bool compareByWorkAndOccurTime(const Item &other) const;
 };
 
-
+template <class T>
+bool Item<T>::compareByOccurTime(const Item& other) const {
+    return occur_time < other.occur_time;
+}
 
 template <class T>
 bool Item<T>::compareByWorkTime(const Item& other) const {
     return work_time < other.work_time;
 }
+
+template <class T>
+bool Item<T>::compareByIdleTime(const Item& other) const {
+    return idle_time < other.idle_time;
+}
+
 
 /**
  * @brief Compares two items based on their work times and occurrence times.

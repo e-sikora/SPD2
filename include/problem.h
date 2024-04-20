@@ -94,6 +94,8 @@ public:
 
     void listSizeIncrement(){this->list_size++;}
 
+    void listSizeDecrement(){this->list_size--;}
+
     void listSizeZero(){this->list_size = 0;}
 
     void mainListClear(){this->main_list.clear();}

@@ -37,4 +37,6 @@ void LSAandLPTCore(Problem loaded_problem);
 void LSA(Problem loaded_problem);
 
 void LPT(Problem loaded_problem);
+
+void dynamicProgramingTwoMachines(Problem loaded_problem);
 };

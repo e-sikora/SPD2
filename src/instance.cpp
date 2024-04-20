@@ -86,9 +86,7 @@ void Instance<Problem>::fullReview(Problem loaded_problem){
                 current_combination[k] = 0;
             }
         }
-
-        //TUTAJ TRZEBA WYWOŁAĆ FUNKCJĘ ROZDZIELAJĄCĄ I PÓŹNIEJ LICZĄCA CZAS
-
+        
         this->divideTasks(current_combination, loaded_problem);
         current_work_time = this->workTime();
         if(best_work_time > current_work_time || best_work_time == 0){
@@ -156,6 +154,101 @@ void Instance<Problem>::LPT(Problem loaded_problem){
     std::cout << "------------------LPT algorithm------------------" << std::endl;
     this->displayMachinesResult();
     this->clearInstance();
+}
+
+template<class Problem>
+void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem){
+    int one_machine_work_time = loaded_problem.workTime();
+    int columns = floor(one_machine_work_time/2)+1;
+    int rows = loaded_problem.getSize()+1; 
+    int last_row_with_one = rows;
+    std::vector<std::vector<int>> divide_matrix(rows, std::vector<int>(columns)); 
+    std::vector<int> divided_tasks (int(loaded_problem.getSize()), machines);
+    bool first_iteration = true;
+
+    for(int i = 0; i < rows; i++) {
+        for(int j = 0; j < columns; j++) {
+            if(j == 0)
+                divide_matrix[i][j] = 1;
+            else
+                divide_matrix[i][j] = 0;
+            
+        }
+    }
+
+    // for(int i = 0; i < rows; i++) {
+    //     std::cout << "|";
+    //     for(int j = 0; j < columns; j++) {
+    //         std::cout << divide_matrix[i][j] << "|";
+            
+    //     }
+    //     std::cout << std::endl;
+    // }
+    // std::cout << std::endl;
+
+    for(int i = 1; i < rows; i++) {
+        for(int j = 1; j < columns; j++) {
+            if(divide_matrix[i-1][j]||((j >= loaded_problem.getItem(i-1).getWorkTime()) 
+            && divide_matrix[i-1][j-loaded_problem.getItem(i-1).getWorkTime()] == 1)){
+                divide_matrix[i][j] = 1;
+            }
+            
+        }
+    }
+
+    // for(int i = 0; i < rows; i++) {
+    //     std::cout << "|";
+    //     for(int j = 0; j < columns; j++) {
+    //         std::cout << divide_matrix[i][j] << "|";
+            
+    //     }
+    //     std::cout << std::endl;
+    // }
+    // std::cout << std::endl;
+
+
+
+    for(int j = columns-1; j >= 1; j--) {
+        if(first_iteration){
+            for(int i = 1; i < rows; i++) {
+                if(divide_matrix[i][j] == 1){
+                    //std::cout << "miejsce " << i << " " << j << std::endl;
+                    divided_tasks[i-1] = 0;
+                    last_row_with_one = i;
+                    first_iteration = false;
+                    break;
+                }
+            }
+        }
+
+        else{
+            for(int i = 1; i < rows; i++) {
+                if(divide_matrix[i][j] == 1 && last_row_with_one > i){
+                    //std::cout << "miejsce " << i << " " << j << std::endl;
+                    divided_tasks[i-1] = 0;
+                    break;
+                }
+            }
+        }
+    }
+
+    for (size_t i = 0; i < divided_tasks.size(); ++i) {
+        if(divided_tasks[i] == int(machines)){
+            divided_tasks[i] = 1;
+        }
+    }
+
+    // for(size_t k = 0; k < divided_tasks.size(); k++){
+    //     std::cout << divided_tasks[k] << " ";
+    // }
+    // std::cout << std::endl;
+
+
+    this->divideTasks(divided_tasks, loaded_problem);    
+    std::cout << "--------Dynamic programing (2 machines)----------" << std::endl;
+    this->displayMachinesResult();
+    this->clearInstance();
+
 }
 
 template class Instance<Problem<Item<int>>>;
