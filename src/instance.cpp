@@ -31,7 +31,6 @@ template<class Problem>
 void Instance<Problem>::divideTasks(std::vector<int> tasks, Problem loaded_problem){
     int problem_amount = int(loaded_problem.getSize());
 
-
     for(int i = 0; i < problem_amount; i++){
         for(int j = 0; j < int(this->machines); j++){
             if(tasks[i] == j){
@@ -107,6 +106,7 @@ void Instance<Problem>::fullReview(Problem loaded_problem){
     this->divideTasks(best_combination, loaded_problem);
     std::cout << "------------------Full review--------------------" << std::endl;
     this->displayMachinesResult();
+    this->clearInstance();
 }
 
 template<class Problem>
@@ -145,6 +145,7 @@ void Instance<Problem>::LSA(Problem loaded_problem){
 
     std::cout << "------------------LSA algorithm------------------" << std::endl;
     this->displayMachinesResult();
+    this->clearInstance();
 }
 
 template<class Problem>
@@ -154,6 +155,7 @@ void Instance<Problem>::LPT(Problem loaded_problem){
 
     std::cout << "------------------LPT algorithm------------------" << std::endl;
     this->displayMachinesResult();
+    this->clearInstance();
 }
 
 template class Instance<Problem<Item<int>>>;
