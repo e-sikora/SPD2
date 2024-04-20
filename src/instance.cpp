@@ -63,7 +63,9 @@ void Instance<Problem>::displayMachinesResult(){
         std::cout << std::endl;
     }
 
-    std::cout << "Best work time in this order is: " << this->workTime() << std::endl;
+    std::cout << "Best work time in this order is: " << this->workTime() 
+    << std::endl << std::endl;
+
 }
 
 template<class Problem>
@@ -77,7 +79,7 @@ void Instance<Problem>::fullReview(Problem loaded_problem){
     for(int i = 0; i < problem_amount; i++) {
         modulo[i] = std::pow(loaded_problem.getMachines(), i+1);
     }
-    
+
     for(int j = 0; j < std::pow(loaded_problem.getMachines(), problem_amount); j++) {
         for(int k = 0; k < problem_amount; k++) {
             if(counter%modulo[k] == 0 && current_combination[k] > 0) {
@@ -103,8 +105,42 @@ void Instance<Problem>::fullReview(Problem loaded_problem){
 
     this->clearInstance();
     this->divideTasks(best_combination, loaded_problem);
+    std::cout << "------------------Full review--------------------" << std::endl;
     this->displayMachinesResult();
 }
 
+template<class Problem>
+int Instance<Problem>::lessBurdenedMachine(){
+    std::vector<int> current_work_time(machines, 0);
+    int machine_number = 0, min_work_amount = problem_list[0].workTime();
+
+    for(size_t i = 0; i < machines; i++){
+        current_work_time[i] = problem_list[i].workTime();
+
+        if(current_work_time[i] < min_work_amount) {
+            machine_number = int(i);
+            min_work_amount = current_work_time[i];
+        }
+    }
+
+    return machine_number;
+}
+
+template<class Problem>
+void Instance<Problem>::LPT(Problem loaded_problem){
+    loaded_problem.workTimeSort();
+    size_t problem_amount = loaded_problem.getSize();
+    int less_burdened;
+
+
+    for(size_t i = 0; i < problem_amount; i++){
+        less_burdened = this->lessBurdenedMachine();
+        this->problem_list[less_burdened].pushBack(loaded_problem.getItem(i));
+        this->problem_list[less_burdened].listSizeIncrement();
+    }
+    std::cout << "------------------LPT algorithm------------------" << std::endl;
+    this->displayMachinesResult();
+   
+}
 
 template class Instance<Problem<Item<int>>>;

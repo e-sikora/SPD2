@@ -29,4 +29,8 @@ void clearInstance();
 void displayMachinesResult();
 
 void fullReview(Problem loaded_problem);
+
+int lessBurdenedMachine();
+
+void LPT(Problem loaded_problem);
 };

@@ -29,9 +29,10 @@ int main(int argc, char *argv[]) {
 
   //instance.setMachine(problem, 0);
 
-  //int work_time = instance.workTime();
-  //std::cout << work_time << std::endl;
+  // int work_time = instance.workTime();
+  // std::cout << work_time << std::endl << std::endl;
 
+  instance.LPT(problem);
   instance.fullReview(problem);
 
 

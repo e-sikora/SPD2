@@ -99,6 +99,8 @@ public:
    */
     bool compareByOccurTime(const Item &other) const;
 
+    bool compareByWorkTime(const Item &other) const;
+
     /**
      * @brief Compares two items based on their idle times.
      *
@@ -117,6 +119,13 @@ public:
      */
     bool compareByWorkAndOccurTime(const Item &other) const;
 };
+
+
+
+template <class T>
+bool Item<T>::compareByWorkTime(const Item& other) const {
+    return work_time < other.work_time;
+}
 
 /**
  * @brief Compares two items based on their work times and occurrence times.

@@ -97,6 +97,10 @@ public:
     void listSizeZero(){this->list_size = 0;}
 
     void mainListClear(){this->main_list.clear();}
+
+    void workTimeSort();
+
+    //int workTime();
 };
 
 // #ifdef ENABLE_DOCTEST_IN_LIBRARY

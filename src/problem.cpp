@@ -56,28 +56,10 @@ void Problem<Item>::loadFromFile(const std::string &file_name) {
 
 template<class Item>
 int Problem<Item>::workTime() {
-    std::vector<int> work_time(machine_amount, 0);
-    std::vector<int> post_end_time;
     int total_work_time = 0;
 
-    for (int i = 0; i < this->list_size; i++) {
-        if (total_work_time < this->getItem(i).getOccurTime()) {
-            total_work_time += (this->getItem(i).getOccurTime() - total_work_time);
-
-        }
-        total_work_time += this->getItem(i).getWorkTime();
-        post_end_time.push_back(total_work_time + this->getItem(i).getIdleTime());
-    }
-
-    if(true){
-        int helper = 0;
-        for (int i = 0; i < int(post_end_time.size()); i++){
-            helper = post_end_time[i] - total_work_time;
-            
-            if(helper > 0){
-                total_work_time += helper;
-            }    
-        }
+    for(int i = 0; i < this->list_size; i++){
+        total_work_time += this->main_list[i].getWorkTime();
     }
 
     return total_work_time;
@@ -134,6 +116,11 @@ void Problem<Item>::timeMeasure(std::function<void()> callback) {
 
     std::cout << "Powyższy algorytm wykonywał się: " << duration.count() << "ms" 
               << std::endl << std::endl;
+}
+
+template<class Item>
+void Problem<Item>::workTimeSort() {
+    std::sort(main_list.begin(), main_list.end(), [](const Item &a, const Item &b) { return a.compareByWorkTime(b); });
 }
 
 
