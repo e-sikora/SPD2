@@ -32,6 +32,7 @@ int main(int argc, char *argv[]) {
   // int work_time = instance.workTime();
   // std::cout << work_time << std::endl << std::endl;
 
+  instance.LSA(problem);
   instance.LPT(problem);
   instance.fullReview(problem);
 

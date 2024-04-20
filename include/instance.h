@@ -32,5 +32,9 @@ void fullReview(Problem loaded_problem);
 
 int lessBurdenedMachine();
 
+void LSAandLPTCore(Problem loaded_problem);
+
+void LSA(Problem loaded_problem);
+
 void LPT(Problem loaded_problem);
 };

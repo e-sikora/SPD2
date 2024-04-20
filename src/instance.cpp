@@ -127,8 +127,7 @@ int Instance<Problem>::lessBurdenedMachine(){
 }
 
 template<class Problem>
-void Instance<Problem>::LPT(Problem loaded_problem){
-    loaded_problem.workTimeSort();
+void Instance<Problem>::LSAandLPTCore(Problem loaded_problem){
     size_t problem_amount = loaded_problem.getSize();
     int less_burdened;
 
@@ -138,9 +137,23 @@ void Instance<Problem>::LPT(Problem loaded_problem){
         this->problem_list[less_burdened].pushBack(loaded_problem.getItem(i));
         this->problem_list[less_burdened].listSizeIncrement();
     }
+}
+
+template<class Problem>
+void Instance<Problem>::LSA(Problem loaded_problem){
+    LSAandLPTCore(loaded_problem);
+
+    std::cout << "------------------LSA algorithm------------------" << std::endl;
+    this->displayMachinesResult();
+}
+
+template<class Problem>
+void Instance<Problem>::LPT(Problem loaded_problem){
+    loaded_problem.workTimeSort();
+    LSAandLPTCore(loaded_problem);
+
     std::cout << "------------------LPT algorithm------------------" << std::endl;
     this->displayMachinesResult();
-   
 }
 
 template class Instance<Problem<Item<int>>>;
