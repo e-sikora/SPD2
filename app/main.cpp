@@ -10,6 +10,8 @@
 
 #include "instance.h"
 
+using namespace std;
+
 
 int main(int argc, char *argv[]) {
   if(argc!=2){
@@ -20,27 +22,15 @@ int main(int argc, char *argv[]) {
   Problem<Item<int>> problem;
   problem.loadFromFile(argv[1]);
 
-  //std::cout << problem.getMachines() << std::endl;
-
   Instance<Problem<Item<int>>> instance(problem.getMachines());
- 
-  //std::cout << "jestem" << std::endl;
-  //std::cout << instance.getMachines() << std::endl;
-
-  //instance.setMachine(problem, 0);
-
-  // int work_time = instance.workTime();
-  // std::cout << work_time << std::endl << std::endl;
 
   instance.LSA(problem);
   instance.LPT(problem);
   instance.fullReview(problem);
   if(problem.getMachines()==2) {
-    instance.dynamicProgramingTwoMachines(problem, true);
+   instance.dynamicProgramingTwoMachines(problem, true);
   }
-  
-
-
+  instance.algorithmPTAS(problem);
 
   return 0;
 }

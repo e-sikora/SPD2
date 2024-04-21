@@ -39,4 +39,14 @@ void LSA(Problem loaded_problem);
 void LPT(Problem loaded_problem);
 
 void dynamicProgramingTwoMachines(Problem loaded_problem, bool display_matrix);
+
+int factorial(int number);
+
+int binomialCoefficient(int n, int k);
+
+void generateBinaryCombinations(int N, int K, std::vector<int>& combination, int index, std::vector<std::vector<int>>& combinations);
+
+void algorithmPTAS(Problem loaded_problem);
+
+
 };

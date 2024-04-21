@@ -176,16 +176,6 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
         }
     }
 
-    // for(int i = 0; i < rows; i++) {
-    //     std::cout << "|";
-    //     for(int j = 0; j < columns; j++) {
-    //         std::cout << divide_matrix[i][j] << "|";
-            
-    //     }
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-
     for(int i = 1; i < rows; i++) {
         for(int j = 1; j < columns; j++) {
             if(divide_matrix[i-1][j]||((j >= loaded_problem.getItem(i-1).getWorkTime()) 
@@ -248,7 +238,102 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
     }
     
     this->clearInstance();
+}
 
+template<class Problem>
+int Instance<Problem>::factorial(int number) {
+    int result = 1;
+
+    if(number < 0) {
+        std::cerr << "Error! Can't calculate factorial from negative number!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    else if(number > 0) {
+        for(int i = 1; i <= number; i++) {
+            result = result * i;
+        }        
+    }
+
+    return result;
+}
+
+template<class Problem>
+int Instance<Problem>::binomialCoefficient(int n, int k) {
+
+    int numerator = this->factorial(n);
+    int denumerator = this->factorial(k) * this->factorial(n-k);
+    int result = numerator/denumerator;
+
+    return result;
+}
+
+template<class Problem>
+void Instance<Problem>::generateBinaryCombinations(int N, int K, std::vector<int>& combination, int index, std::vector<std::vector<int>>& combinations) {
+    if (K == 0) {
+        combinations.push_back(combination);
+        return;
+    }
+
+    if (index >= N)
+        return;
+
+    combination[index] = 1;
+    generateBinaryCombinations(N, K - 1, combination, index + 1, combinations);
+
+    combination[index] = 0;
+    generateBinaryCombinations(N, K, combination, index + 1, combinations);
+}
+
+
+template<class Problem>
+void Instance<Problem>::algorithmPTAS(Problem loaded_problem) {
+    loaded_problem.workTimeSort();
+    int problem_amount = loaded_problem.getSize();
+    int best_work_time = 0, current_work_time = 0, machine_number = 0;
+    std::vector<int> best_combination(problem_amount, 0);
+
+    int combinations_amount = this->binomialCoefficient(problem_amount, machines-1);
+
+    std::vector<std::vector<int>> combinations;
+    std::vector<int> start_combination(problem_amount, 0);
+
+    generateBinaryCombinations(problem_amount, machines-1, start_combination, 0, combinations);
+
+    if(int(combinations.size()) != combinations_amount){
+        std::cerr << "Missmatch in generated combination amount!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    
+    for(const auto& combination : combinations) {
+        for(int i = 0; i < problem_amount; i++){
+            this->problem_list[machine_number].pushBack(loaded_problem.getItem(i));
+            this->problem_list[machine_number].listSizeIncrement();
+            if(combination[i] == 1){
+               machine_number++;
+            }
+        }
+
+        current_work_time = this->workTime();
+        if(best_work_time > current_work_time || best_work_time == 0){
+            best_work_time = current_work_time;
+            best_combination = combination;
+        }
+        this->clearInstance();
+
+        machine_number = 0;
+    }
+
+    for(int i = 0; i < problem_amount; i++){
+        this->problem_list[machine_number].pushBack(loaded_problem.getItem(i));
+        this->problem_list[machine_number].listSizeIncrement();
+        if(best_combination[i] == 1){
+            machine_number++;
+        }
+    }
+
+    std::cout << "-----------------PTAS algorithm------------------" << std::endl;
+    this->displayMachinesResult();
+    this->clearInstance();
 }
 
 template class Instance<Problem<Item<int>>>;
