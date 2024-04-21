@@ -69,24 +69,10 @@ include CMakeFiles/engine.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/engine.dir/flags.make
 
-CMakeFiles/engine.dir/src/item.cpp.o: CMakeFiles/engine.dir/flags.make
-CMakeFiles/engine.dir/src/item.cpp.o: ../src/item.cpp
-CMakeFiles/engine.dir/src/item.cpp.o: CMakeFiles/engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/esikora/SPD/SPD2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/engine.dir/src/item.cpp.o"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/src/item.cpp.o -MF CMakeFiles/engine.dir/src/item.cpp.o.d -o CMakeFiles/engine.dir/src/item.cpp.o -c /home/esikora/SPD/SPD2/src/item.cpp
-
-CMakeFiles/engine.dir/src/item.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/item.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/esikora/SPD/SPD2/src/item.cpp > CMakeFiles/engine.dir/src/item.cpp.i
-
-CMakeFiles/engine.dir/src/item.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/item.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/esikora/SPD/SPD2/src/item.cpp -o CMakeFiles/engine.dir/src/item.cpp.s
-
 CMakeFiles/engine.dir/src/problem.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/problem.cpp.o: ../src/problem.cpp
 CMakeFiles/engine.dir/src/problem.cpp.o: CMakeFiles/engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/esikora/SPD/SPD2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/engine.dir/src/problem.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/esikora/SPD/SPD2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/engine.dir/src/problem.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/src/problem.cpp.o -MF CMakeFiles/engine.dir/src/problem.cpp.o.d -o CMakeFiles/engine.dir/src/problem.cpp.o -c /home/esikora/SPD/SPD2/src/problem.cpp
 
 CMakeFiles/engine.dir/src/problem.cpp.i: cmake_force
@@ -100,7 +86,7 @@ CMakeFiles/engine.dir/src/problem.cpp.s: cmake_force
 CMakeFiles/engine.dir/src/instance.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/instance.cpp.o: ../src/instance.cpp
 CMakeFiles/engine.dir/src/instance.cpp.o: CMakeFiles/engine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/esikora/SPD/SPD2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/engine.dir/src/instance.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/esikora/SPD/SPD2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/engine.dir/src/instance.cpp.o"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/engine.dir/src/instance.cpp.o -MF CMakeFiles/engine.dir/src/instance.cpp.o.d -o CMakeFiles/engine.dir/src/instance.cpp.o -c /home/esikora/SPD/SPD2/src/instance.cpp
 
 CMakeFiles/engine.dir/src/instance.cpp.i: cmake_force
@@ -111,7 +97,6 @@ CMakeFiles/engine.dir/src/instance.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/instance.cpp.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/esikora/SPD/SPD2/src/instance.cpp -o CMakeFiles/engine.dir/src/instance.cpp.s
 
-engine: CMakeFiles/engine.dir/src/item.cpp.o
 engine: CMakeFiles/engine.dir/src/problem.cpp.o
 engine: CMakeFiles/engine.dir/src/instance.cpp.o
 engine: CMakeFiles/engine.dir/build.make

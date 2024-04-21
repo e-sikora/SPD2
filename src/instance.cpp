@@ -157,7 +157,7 @@ void Instance<Problem>::LPT(Problem loaded_problem){
 }
 
 template<class Problem>
-void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem){
+void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, bool display_matrix){
     int one_machine_work_time = loaded_problem.workTime();
     int columns = floor(one_machine_work_time/2)+1;
     int rows = loaded_problem.getSize()+1; 
@@ -196,23 +196,10 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem){
         }
     }
 
-    // for(int i = 0; i < rows; i++) {
-    //     std::cout << "|";
-    //     for(int j = 0; j < columns; j++) {
-    //         std::cout << divide_matrix[i][j] << "|";
-            
-    //     }
-    //     std::cout << std::endl;
-    // }
-    // std::cout << std::endl;
-
-
-
     for(int j = columns-1; j >= 1; j--) {
         if(first_iteration){
             for(int i = 1; i < rows; i++) {
                 if(divide_matrix[i][j] == 1){
-                    //std::cout << "miejsce " << i << " " << j << std::endl;
                     divided_tasks[i-1] = 0;
                     last_row_with_one = i;
                     first_iteration = false;
@@ -224,7 +211,6 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem){
         else{
             for(int i = 1; i < rows; i++) {
                 if(divide_matrix[i][j] == 1 && last_row_with_one > i){
-                    //std::cout << "miejsce " << i << " " << j << std::endl;
                     divided_tasks[i-1] = 0;
                     break;
                 }
@@ -247,6 +233,20 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem){
     this->divideTasks(divided_tasks, loaded_problem);    
     std::cout << "--------Dynamic programing (2 machines)----------" << std::endl;
     this->displayMachinesResult();
+    
+    if(display_matrix) {
+        std::cout << "Resul matrix created during picking task for first machine:" << std::endl;
+        for(int i = 0; i < rows; i++) {
+            std::cout << "|";
+            for(int j = 0; j < columns; j++) {
+                std::cout << divide_matrix[i][j] << "|";
+                
+            }
+            std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
+    
     this->clearInstance();
 
 }

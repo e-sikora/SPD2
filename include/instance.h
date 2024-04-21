@@ -38,5 +38,5 @@ void LSA(Problem loaded_problem);
 
 void LPT(Problem loaded_problem);
 
-void dynamicProgramingTwoMachines(Problem loaded_problem);
+void dynamicProgramingTwoMachines(Problem loaded_problem, bool display_matrix);
 };

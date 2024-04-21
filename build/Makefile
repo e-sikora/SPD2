@@ -274,30 +274,6 @@ src/instance.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/instance.cpp.s
 .PHONY : src/instance.cpp.s
 
-src/item.o: src/item.cpp.o
-.PHONY : src/item.o
-
-# target to build an object file
-src/item.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/item.cpp.o
-.PHONY : src/item.cpp.o
-
-src/item.i: src/item.cpp.i
-.PHONY : src/item.i
-
-# target to preprocess a source file
-src/item.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/item.cpp.i
-.PHONY : src/item.cpp.i
-
-src/item.s: src/item.cpp.s
-.PHONY : src/item.s
-
-# target to generate assembly for a file
-src/item.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/item.cpp.s
-.PHONY : src/item.cpp.s
-
 src/problem.o: src/problem.cpp.o
 .PHONY : src/problem.o
 
@@ -345,9 +321,6 @@ help:
 	@echo "... src/instance.o"
 	@echo "... src/instance.i"
 	@echo "... src/instance.s"
-	@echo "... src/item.o"
-	@echo "... src/item.i"
-	@echo "... src/item.s"
 	@echo "... src/problem.o"
 	@echo "... src/problem.i"
 	@echo "... src/problem.s"

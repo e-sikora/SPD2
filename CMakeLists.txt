@@ -42,7 +42,6 @@ include(Warnings)
 #                         Locate files (change as needed).
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
-        src/item.cpp
         src/problem.cpp
         src/instance.cpp
 )

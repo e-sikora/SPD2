@@ -104,13 +104,11 @@ unit_tests_OBJECTS = \
 
 # External object files for target unit_tests
 unit_tests_EXTERNAL_OBJECTS = \
-"/home/esikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/item.cpp.o" \
 "/home/esikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/problem.cpp.o" \
 "/home/esikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/instance.cpp.o"
 
 unit_tests: tests/CMakeFiles/unit_tests.dir/main.cpp.o
 unit_tests: tests/CMakeFiles/unit_tests.dir/dummy.cpp.o
-unit_tests: CMakeFiles/engine.dir/src/item.cpp.o
 unit_tests: CMakeFiles/engine.dir/src/problem.cpp.o
 unit_tests: CMakeFiles/engine.dir/src/instance.cpp.o
 unit_tests: tests/CMakeFiles/unit_tests.dir/build.make

@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/engine.dir/src/instance.cpp.o"
   "CMakeFiles/engine.dir/src/instance.cpp.o.d"
-  "CMakeFiles/engine.dir/src/item.cpp.o"
-  "CMakeFiles/engine.dir/src/item.cpp.o.d"
   "CMakeFiles/engine.dir/src/problem.cpp.o"
   "CMakeFiles/engine.dir/src/problem.cpp.o.d"
 )

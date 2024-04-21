@@ -89,12 +89,10 @@ main_OBJECTS = \
 
 # External object files for target main
 main_EXTERNAL_OBJECTS = \
-"/home/esikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/item.cpp.o" \
 "/home/esikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/problem.cpp.o" \
 "/home/esikora/SPD/SPD2/build/CMakeFiles/engine.dir/src/instance.cpp.o"
 
 main: CMakeFiles/main.dir/app/main.cpp.o
-main: CMakeFiles/engine.dir/src/item.cpp.o
 main: CMakeFiles/engine.dir/src/problem.cpp.o
 main: CMakeFiles/engine.dir/src/instance.cpp.o
 main: CMakeFiles/main.dir/build.make
