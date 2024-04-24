@@ -102,6 +102,8 @@ public:
 
     void workTimeSort();
 
+    void divideElement(const int divider);
+
     //int workTime();
 };
 

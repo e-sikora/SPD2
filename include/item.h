@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <cmath>
 
 /**
  * @brief A class representing an item with attributes like ID, occurrence time,
@@ -85,6 +86,8 @@ public:
    * @return int The idle time associated with the item.
    */
     void setIdleTime(int idle_time_s) { idle_time = idle_time_s; }
+
+    void divideWorkTime(const int divider) { work_time = floor(work_time/divider);}
 
     /**
     * @brief Overloaded less than operator for comparing items based on their IDs.

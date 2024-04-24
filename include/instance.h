@@ -1,7 +1,5 @@
 #pragma once 
 
-#include <cmath>
-
 #include "problem.h"
 
 
@@ -28,7 +26,7 @@ void clearInstance();
 
 void displayMachinesResult();
 
-void fullReview(Problem loaded_problem);
+void fullReview(Problem loaded_problem, bool display);
 
 int lessBurdenedMachine();
 
@@ -38,7 +36,7 @@ void LSA(Problem loaded_problem);
 
 void LPT(Problem loaded_problem);
 
-void dynamicProgramingTwoMachines(Problem loaded_problem, bool display_matrix);
+void dynamicProgramingTwoMachines(Problem loaded_problem, bool display, bool display_matrix);
 
 int factorial(int number);
 
@@ -46,7 +44,9 @@ int binomialCoefficient(int n, int k);
 
 void generateBinaryCombinations(int N, int K, std::vector<int>& combination, int index, std::vector<std::vector<int>>& combinations);
 
+void algorithmWrongPTAS(Problem loaded_problem);
+
 void algorithmPTAS(Problem loaded_problem);
 
-
+void algorithmFPTAS(Problem loaded_problem);
 };

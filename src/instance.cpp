@@ -68,7 +68,7 @@ void Instance<Problem>::displayMachinesResult(){
 }
 
 template<class Problem>
-void Instance<Problem>::fullReview(Problem loaded_problem){
+void Instance<Problem>::fullReview(Problem loaded_problem, bool display){
     int problem_amount = int(loaded_problem.getSize()), counter = 0, best_work_time = 0, current_work_time = 0;
 
     std::vector<int> modulo(problem_amount, 0);
@@ -102,9 +102,11 @@ void Instance<Problem>::fullReview(Problem loaded_problem){
 
     this->clearInstance();
     this->divideTasks(best_combination, loaded_problem);
-    std::cout << "------------------Full review--------------------" << std::endl;
-    this->displayMachinesResult();
-    this->clearInstance();
+    if(display){
+        std::cout << "------------------Full review--------------------" << std::endl;
+        this->displayMachinesResult();
+        this->clearInstance();
+    }
 }
 
 template<class Problem>
@@ -157,7 +159,7 @@ void Instance<Problem>::LPT(Problem loaded_problem){
 }
 
 template<class Problem>
-void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, bool display_matrix){
+void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, bool display, bool display_matrix){
     int one_machine_work_time = loaded_problem.workTime();
     int columns = floor(one_machine_work_time/2)+1;
     int rows = loaded_problem.getSize()+1; 
@@ -220,9 +222,13 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
     // std::cout << std::endl;
 
 
-    this->divideTasks(divided_tasks, loaded_problem);    
-    std::cout << "--------Dynamic programing (2 machines)----------" << std::endl;
-    this->displayMachinesResult();
+    this->divideTasks(divided_tasks, loaded_problem); 
+
+    if(display){   
+        std::cout << "--------Dynamic programing (2 machines)----------" << std::endl;
+        this->displayMachinesResult();
+        this->clearInstance();
+    }
     
     if(display_matrix) {
         std::cout << "Resul matrix created during picking task for first machine:" << std::endl;
@@ -237,7 +243,7 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
         std::cout << std::endl;
     }
     
-    this->clearInstance();
+    
 }
 
 template<class Problem>
@@ -286,7 +292,7 @@ void Instance<Problem>::generateBinaryCombinations(int N, int K, std::vector<int
 
 
 template<class Problem>
-void Instance<Problem>::algorithmPTAS(Problem loaded_problem) {
+void Instance<Problem>::algorithmWrongPTAS(Problem loaded_problem) { //jednak źle zrozumiałem XD
     loaded_problem.workTimeSort();
     int problem_amount = loaded_problem.getSize();
     int best_work_time = 0, current_work_time = 0, machine_number = 0;
@@ -334,6 +340,76 @@ void Instance<Problem>::algorithmPTAS(Problem loaded_problem) {
     std::cout << "-----------------PTAS algorithm------------------" << std::endl;
     this->displayMachinesResult();
     this->clearInstance();
+}
+
+template<class Problem>
+void Instance<Problem>::algorithmPTAS(Problem loaded_problem){
+    loaded_problem.workTimeSort();
+    int problem_amount = loaded_problem.getSize(), first_divide = 0;
+
+    
+    for(int i = 0; i < problem_amount; i++) {
+        first_divide = problem_amount - i;
+
+        Problem first_divide_list;
+        Problem second_divide_list;
+
+        for(int j = 0; j < first_divide; j++){
+            first_divide_list.pushBack(loaded_problem.getItem(j));
+            first_divide_list.listSizeIncrement();
+        }
+        for(int k = 0; k < i; k++){
+            second_divide_list.pushBack(loaded_problem.getItem(k+first_divide));
+            second_divide_list.listSizeIncrement();
+        }
+
+        // std::cout << "First list: " << std::endl;
+        // for(size_t k = 0; k < first_divide_list.getSize(); k++){
+        //     std::cout << first_divide_list.getItem(k).getId() << " ";
+        // }
+        // std::cout << std::endl;
+
+        // std::cout << "Second list: " << std::endl;
+        // for(size_t k = 0; k < second_divide_list.getSize(); k++){
+        //     std::cout << second_divide_list.getItem(k).getId() << " ";
+        // }
+        // std::cout << std::endl;
+
+        this->fullReview(first_divide_list, false);
+        this->LSAandLPTCore(second_divide_list);
+
+        std::cout << "-----------------PTAS algorithm------------------" << std::endl;
+        this->displayMachinesResult();
+        this->clearInstance();
+    }
+}
+
+
+template<class Problem>
+void Instance<Problem>::algorithmFPTAS(Problem loaded_problem){
+    int problem_amount = loaded_problem.getSize();
+    Problem helper = loaded_problem;
+
+
+
+     for(int i = 1; i <= problem_amount; i++) {
+
+        helper.divideElement(i);
+
+        this->dynamicProgramingTwoMachines(helper, false, false);
+
+        //DOKOŃCZ PRZYWRACANIE WARTOŚCI POCZĄTKOWYCH CZASÓW TRAWANIA ZADAŃ
+
+        for(size_t j = 0; j < this->problem_list[0].getSize(); j++){
+
+        }
+
+        std::cout << "----------------FPTAS algorithm------------------" << std::endl;
+        this->displayMachinesResult();
+        this->clearInstance();
+    }
+
+
 }
 
 template class Instance<Problem<Item<int>>>;

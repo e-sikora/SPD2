@@ -24,13 +24,16 @@ int main(int argc, char *argv[]) {
 
   Instance<Problem<Item<int>>> instance(problem.getMachines());
 
-  instance.LSA(problem);
-  instance.LPT(problem);
-  instance.fullReview(problem);
+  // instance.LSA(problem);
+  // instance.LPT(problem);
+  instance.fullReview(problem, true);
   if(problem.getMachines()==2) {
-   instance.dynamicProgramingTwoMachines(problem, true);
+  //  instance.dynamicProgramingTwoMachines(problem, true, true);
+      instance.algorithmFPTAS(problem);
   }
-  instance.algorithmPTAS(problem);
+  // instance.algorithmWrongPTAS(problem);
+  //instance.algorithmPTAS(problem);
+  
 
   return 0;
 }

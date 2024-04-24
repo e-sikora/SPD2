@@ -123,5 +123,12 @@ void Problem<Item>::workTimeSort() {
     std::sort(main_list.begin(), main_list.end(), [](const Item &a, const Item &b) { return a.compareByWorkTime(b); });
 }
 
+template<class Item>
+void Problem<Item>::divideElement(const int divider) {
+    for(int i = 0; i < this->list_size; i++){
+        main_list[i].divideWorkTime(divider);
+    }
+}
+
 
 template class Problem<Item<int>>;
