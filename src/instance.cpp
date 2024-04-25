@@ -217,12 +217,6 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
         }
     }
 
-    // for(size_t k = 0; k < divided_tasks.size(); k++){
-    //     std::cout << divided_tasks[k] << " ";
-    // }
-    // std::cout << std::endl;
-
-
     this->divideTasks(divided_tasks, loaded_problem); 
 
     if(display){   
