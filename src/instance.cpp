@@ -170,11 +170,12 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
 
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < columns; j++) {
-            if(j == 0)
+            if(j == 0){
                 divide_matrix[i][j] = 1;
-            else
+            }
+            else{
                 divide_matrix[i][j] = 0;
-            
+            }
         }
     }
 
@@ -184,7 +185,6 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
             && divide_matrix[i-1][j-loaded_problem.getItem(i-1).getWorkTime()] == 1)){
                 divide_matrix[i][j] = 1;
             }
-            
         }
     }
 
@@ -204,6 +204,7 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
             for(int i = 1; i < rows; i++) {
                 if(divide_matrix[i][j] == 1 && last_row_with_one > i){
                     divided_tasks[i-1] = 0;
+                    last_row_with_one = i;
                     break;
                 }
             }
@@ -236,7 +237,6 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
             std::cout << "|";
             for(int j = 0; j < columns; j++) {
                 std::cout << divide_matrix[i][j] << "|";
-                
             }
             std::cout << std::endl;
         }
@@ -336,8 +336,7 @@ void Instance<Problem>::algorithmWrongPTAS(Problem loaded_problem) { //jednak ź
             machine_number++;
         }
     }
-
-    std::cout << "-----------------PTAS algorithm------------------" << std::endl;
+    std::cout << "---------PTAS algorithm (wrong methode)----------" << std::endl;
     this->displayMachinesResult();
     this->clearInstance();
 }
@@ -347,7 +346,6 @@ void Instance<Problem>::algorithmPTAS(Problem loaded_problem){
     loaded_problem.workTimeSort();
     int problem_amount = loaded_problem.getSize(), first_divide = 0;
 
-    
     for(int i = 0; i < problem_amount; i++) {
         first_divide = problem_amount - i;
 
@@ -390,26 +388,26 @@ void Instance<Problem>::algorithmFPTAS(Problem loaded_problem){
     int problem_amount = loaded_problem.getSize();
     Problem helper = loaded_problem;
 
-
-
-     for(int i = 1; i <= problem_amount; i++) {
+     for(int i = 2; i <= 4; i++) {
 
         helper.divideElement(i);
 
         this->dynamicProgramingTwoMachines(helper, false, false);
 
-        //DOKOŃCZ PRZYWRACANIE WARTOŚCI POCZĄTKOWYCH CZASÓW TRAWANIA ZADAŃ
-
-        for(size_t j = 0; j < this->problem_list[0].getSize(); j++){
-
+        for(size_t j = 0; j < this->machines; j++){
+            for(size_t k = 0; k < this->problem_list[j].getSize(); k++){
+                for(size_t n = 0; n < size_t(problem_amount); n++){
+                    if(loaded_problem.getItem(n).getId() == this->problem_list[j].getItem(k).getId()){
+                        this->problem_list[j].getItem(k).setWorkTime(loaded_problem.getItem(n).getWorkTime());
+                    }
+                }
+            }
         }
 
         std::cout << "----------------FPTAS algorithm------------------" << std::endl;
         this->displayMachinesResult();
         this->clearInstance();
     }
-
-
 }
 
 template class Instance<Problem<Item<int>>>;
