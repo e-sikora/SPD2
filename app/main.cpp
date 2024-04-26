@@ -12,9 +12,17 @@
 
 using namespace std;
 
-
-int main(int argc, char *argv[]) {
-  if(argc!=2){
+/**
+ * @brief Main function of the program.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments.
+ * @return int Return status of the program.
+ */
+int main(int argc, char *argv[])
+{
+  if (argc != 2)
+  {
     std::cout << "Błędne wywołanie programu! Program kończy działanie!" << std::endl;
     exit(EXIT_FAILURE);
   }
@@ -27,13 +35,13 @@ int main(int argc, char *argv[]) {
   instance.LSA(problem);
   instance.LPT(problem);
   instance.fullReview(problem, true);
-  if(problem.getMachines()==2) {
+  if (problem.getMachines() == 2)
+  {
     instance.dynamicProgramingTwoMachines(problem, true, true);
     instance.algorithmFPTAS(problem);
   }
   instance.algorithmWrongPTAS(problem);
   instance.algorithmPTAS(problem);
-  
 
   return 0;
 }

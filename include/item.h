@@ -9,18 +9,19 @@
  *
  * @tparam T The type of the item (currently unused).
  */
-template<class T>
-class Item {
+template <class T>
+class Item
+{
 private:
-    int id; ///< The unique identifier of the item.
+    int id;         ///< The unique identifier of the item.
     int occur_time; ///< The time at which the item occurs.
-    int work_time; ///< The time required to process the item.
-    int idle_time; ///< The idle time associated with the item.
+    int work_time;  ///< The time required to process the item.
+    int idle_time;  ///< The idle time associated with the item.
 
 public:
     /**
-   * @brief Default constructor initializing all attributes to zero.
-   */
+     * @brief Default constructor initializing all attributes to zero.
+     */
     Item() : id(0), occur_time(0), work_time(0), idle_time(0) {}
 
     /**
@@ -31,7 +32,8 @@ public:
      * @param work_time_s The work time required for the item.
      * @param idle_time_s The idle time associated with the item.
      */
-    Item(int id_s, int occur_time_s, int work_time_s, int idle_time_s){
+    Item(int id_s, int occur_time_s, int work_time_s, int idle_time_s)
+    {
         id = id_s;
         occur_time = occur_time_s;
         work_time = work_time_s;
@@ -53,60 +55,70 @@ public:
     int getOccurTime() const { return occur_time; }
 
     /**
-    * @brief Getter method for the work time required for the item.
-    *
-    * @return int The work time required for the item.
-    */
+     * @brief Getter method for the work time required for the item.
+     *
+     * @return int The work time required for the item.
+     */
     int getWorkTime() const { return work_time; }
 
     /**
-   * @brief Getter method for the idle time associated with the item.
-   *
-   * @return int The idle time associated with the item.
-   */
+     * @brief Getter method for the idle time associated with the item.
+     *
+     * @return int The idle time associated with the item.
+     */
     void setWorkTime(int work_time_s) { work_time = work_time_s; }
 
     /**
-   * @brief Getter method for the idle time associated with the item.
-   *
-   * @return int The idle time associated with the item.
-   */
+     * @brief Getter method for the idle time associated with the item.
+     *
+     * @return int The idle time associated with the item.
+     */
     void workTimeDecrement() { work_time -= 1; }
 
     /**
-   * @brief Getter method for the idle time associated with the item.
-   *
-   * @return int The idle time associated with the item.
-   */
+     * @brief Getter method for the idle time associated with the item.
+     *
+     * @return int The idle time associated with the item.
+     */
     int getIdleTime() const { return idle_time; }
 
     /**
-   * @brief Getter method for the idle time associated with the item.
-   *
-   * @return int The idle time associated with the item.
-   */
+     * @brief Getter method for the idle time associated with the item.
+     *
+     * @return int The idle time associated with the item.
+     */
     void setIdleTime(int idle_time_s) { idle_time = idle_time_s; }
-
-    void divideWorkTime(const int divider) { work_time = floor(work_time/divider);}
+    /**
+     * @brief Divides the work time of the item by a specified divider.
+     *
+     * @param divider The value by which to divide the work time.
+     */
+    void divideWorkTime(const int divider) { work_time = floor(work_time / divider); }
 
     /**
-    * @brief Overloaded less than operator for comparing items based on their IDs.
-    *
-    * @param other The other item to compare with.
-    * @return true If this item's ID is less than the other item's ID.
-    * @return false Otherwise.
-    */
-    bool operator<(const Item &other) const {return id < other.id;}
+     * @brief Overloaded less than operator for comparing items based on their IDs.
+     *
+     * @param other The other item to compare with.
+     * @return true If this item's ID is less than the other item's ID.
+     * @return false Otherwise.
+     */
+    bool operator<(const Item &other) const { return id < other.id; }
 
     /**
-   * @brief Compares two items based on their occurrence times.
-   *
-   * @param other The other item to compare with.
-   * @return true If this item's occurrence time is less than the other item's.
-   * @return false Otherwise.
-   */
+     * @brief Compares two items based on their occurrence times.
+     *
+     * @param other The other item to compare with.
+     * @return true If this item's occurrence time is less than the other item's.
+     * @return false Otherwise.
+     */
     bool compareByOccurTime(const Item &other) const;
-
+    /**
+     * @brief Compares two items based on their work times.
+     *
+     * @param other The other item to compare with.
+     * @return true If this item's work time is less than the other item's.
+     * @return false Otherwise.
+     */
     bool compareByWorkTime(const Item &other) const;
 
     /**
@@ -119,7 +131,7 @@ public:
     bool compareByIdleTime(const Item &other) const;
 
     /**
-    * @brief Compares two items based on their work times and occurrence times.
+     * @brief Compares two items based on their work times and occurrence times.
      *
      * @param other The other item to compare with.
      * @return true If this item's work time is less than the other item's, or if their work times are equal and this item's occurrence time is less.
@@ -127,22 +139,45 @@ public:
      */
     bool compareByWorkAndOccurTime(const Item &other) const;
 };
-
+/**
+ * @brief Compares two items based on their occurrence times.
+ *
+ * @tparam T The type of the item (currently unused).
+ * @param other The other item to compare with.
+ * @return true If this item's occurrence time is less than the other item's.
+ * @return false Otherwise.
+ */
 template <class T>
-bool Item<T>::compareByOccurTime(const Item& other) const {
+bool Item<T>::compareByOccurTime(const Item &other) const
+{
     return occur_time < other.occur_time;
 }
-
+/**
+ * @brief Compares two items based on their work times.
+ *
+ * @tparam T The type of the item (currently unused).
+ * @param other The other item to compare with.
+ * @return true If this item's work time is less than the other item's.
+ * @return false Otherwise.
+ */
 template <class T>
-bool Item<T>::compareByWorkTime(const Item& other) const {
+bool Item<T>::compareByWorkTime(const Item &other) const
+{
     return work_time < other.work_time;
 }
-
+/**
+ * @brief Compares two items based on their idle times.
+ *
+ * @tparam T The type of the item (currently unused).
+ * @param other The other item to compare with.
+ * @return true If this item's idle time is less than the other item's.
+ * @return false Otherwise.
+ */
 template <class T>
-bool Item<T>::compareByIdleTime(const Item& other) const {
+bool Item<T>::compareByIdleTime(const Item &other) const
+{
     return idle_time < other.idle_time;
 }
-
 
 /**
  * @brief Compares two items based on their work times and occurrence times.
@@ -152,17 +187,18 @@ bool Item<T>::compareByIdleTime(const Item& other) const {
  * @return true If this item's work time is less than the other item's, or if their work times are equal and this item's occurrence time is less.
  * @return false Otherwise.
  */
-template<class T>
-bool Item<T>::compareByWorkAndOccurTime(const Item &other) const {
+template <class T>
+bool Item<T>::compareByWorkAndOccurTime(const Item &other) const
+{
     return (work_time + occur_time) < (other.work_time + other.occur_time);
 }
-
 
 #ifdef ENABLE_DOCTEST_IN_LIBRARY
 
 #include "doctest/doctest.h"
 
-TEST_CASE("Item class") {
+TEST_CASE("Item class")
+{
     // Default constructor
     Item<int> defaultItem;
     CHECK(defaultItem.getId() == 0);
