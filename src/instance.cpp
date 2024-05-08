@@ -355,18 +355,6 @@ void Instance<Problem>::algorithmPTAS(Problem loaded_problem){
             second_divide_list.listSizeIncrement();
         }
 
-        // std::cout << "First list: " << std::endl;
-        // for(size_t k = 0; k < first_divide_list.getSize(); k++){
-        //     std::cout << first_divide_list.getItem(k).getId() << " ";
-        // }
-        // std::cout << std::endl;
-
-        // std::cout << "Second list: " << std::endl;
-        // for(size_t k = 0; k < second_divide_list.getSize(); k++){
-        //     std::cout << second_divide_list.getItem(k).getId() << " ";
-        // }
-        // std::cout << std::endl;
-
         this->fullReview(first_divide_list, false);
         this->LSAandLPTCore(second_divide_list);
 
@@ -382,7 +370,7 @@ void Instance<Problem>::algorithmFPTAS(Problem loaded_problem){
     int problem_amount = loaded_problem.getSize();
     Problem helper = loaded_problem;
 
-     for(int i = 2; i <= 4; i++) {
+     for(int i = 2; i <= 2; i++) {
 
         helper.divideElement(i);
 
@@ -402,6 +390,19 @@ void Instance<Problem>::algorithmFPTAS(Problem loaded_problem){
         this->displayMachinesResult();
         this->clearInstance();
     }
+}
+
+template<class Problem>
+void Instance<Problem>::timeMeasure(std::function<void()> callback) {
+    auto start = std::chrono::high_resolution_clock::now();
+
+    callback();
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+
+    std::cout << "Powyższy algorytm wykonywał się: " << duration.count() << "ms" 
+              << std::endl << std::endl;
 }
 
 template class Instance<Problem<Item<int>>>;

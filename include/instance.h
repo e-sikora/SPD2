@@ -49,4 +49,10 @@ void algorithmWrongPTAS(Problem loaded_problem);
 void algorithmPTAS(Problem loaded_problem);
 
 void algorithmFPTAS(Problem loaded_problem);
+
+    /**
+     * @brief Measure time for a given function.
+     * @param callback The function to measure time for.
+     */
+    void timeMeasure(std::function<void()> callback);
 };

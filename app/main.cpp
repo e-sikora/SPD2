@@ -10,9 +10,6 @@
 
 #include "instance.h"
 
-using namespace std;
-
-
 int main(int argc, char *argv[]) {
   if(argc!=2){
     std::cout << "Błędne wywołanie programu! Program kończy działanie!" << std::endl;
@@ -24,16 +21,15 @@ int main(int argc, char *argv[]) {
 
   Instance<Problem<Item<int>>> instance(problem.getMachines());
 
-  instance.LSA(problem);
-  instance.LPT(problem);
-  instance.fullReview(problem, true);
+  instance.timeMeasure([&]() { instance.LSA(problem); });
+  instance.timeMeasure([&]() { instance.LPT(problem); });
+  instance.timeMeasure([&]() { instance.fullReview(problem, true); });
+  //instance.timeMeasure([&]() { instance.algorithmWrongPTAS(problem); });
+  //instance.timeMeasure([&]() { instance.algorithmPTAS(problem); });
   if(problem.getMachines()==2) {
-    instance.dynamicProgramingTwoMachines(problem, true, true);
-    instance.algorithmFPTAS(problem);
+    instance.timeMeasure([&]() { instance.dynamicProgramingTwoMachines(problem, true, true); });
+    //instance.timeMeasure([&]() { instance.algorithmFPTAS(problem); });
   }
-  instance.algorithmWrongPTAS(problem);
-  instance.algorithmPTAS(problem);
   
-
   return 0;
 }
