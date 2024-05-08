@@ -317,28 +317,28 @@ void Instance<Problem>::algorithmPTAS(Problem loaded_problem){
     loaded_problem.workTimeSort();
     int problem_amount = loaded_problem.getSize(), first_divide = 0;
 
-    for(int i = 0; i < problem_amount; i++) {
-        first_divide = problem_amount - i;
+    //Choose PTAS parametr
+    float divider = 0.5;
+    first_divide = floor(problem_amount * divider);
 
-        Problem first_divide_list;
-        Problem second_divide_list;
+    Problem first_divide_list;
+    Problem second_divide_list;
 
-        for(int j = 0; j < first_divide; j++){
-            first_divide_list.pushBack(loaded_problem.getItem(j));
-            first_divide_list.listSizeIncrement();
-        }
-        for(int k = 0; k < i; k++){
-            second_divide_list.pushBack(loaded_problem.getItem(k+first_divide));
-            second_divide_list.listSizeIncrement();
-        }
-
-        this->fullReview(first_divide_list, false);
-        this->LSAandLPTCore(second_divide_list);
-
-        std::cout << "-----------------PTAS algorithm------------------" << std::endl;
-        this->displayMachinesResult();
-        this->clearInstance();
+    for(int j = 0; j < first_divide; j++){
+        first_divide_list.pushBack(loaded_problem.getItem(j));
+        first_divide_list.listSizeIncrement();
     }
+    for(int k = 0; k < problem_amount - first_divide; k++){
+        second_divide_list.pushBack(loaded_problem.getItem(k+first_divide));
+        second_divide_list.listSizeIncrement();
+    }
+
+    this->fullReview(first_divide_list, false);
+    this->LSAandLPTCore(second_divide_list);
+
+    std::cout << "-----------------PTAS algorithm------------------" << std::endl;
+    this->displayMachinesResult();
+    this->clearInstance();
 }
 
 
@@ -347,26 +347,26 @@ void Instance<Problem>::algorithmFPTAS(Problem loaded_problem){
     int problem_amount = loaded_problem.getSize();
     Problem helper = loaded_problem;
 
-     for(int i = 2; i <= 2; i++) {
+    //Chose FPTAS parametr
+    int divider = 2;
 
-        helper.divideElement(i);
+    helper.divideElement(divider);
 
-        this->dynamicProgramingTwoMachines(helper, false, false);
+    this->dynamicProgramingTwoMachines(helper, false, false);
 
-        for(size_t j = 0; j < this->machines; j++){
-            for(size_t k = 0; k < this->problem_list[j].getSize(); k++){
-                for(size_t n = 0; n < size_t(problem_amount); n++){
-                    if(loaded_problem.getItem(n).getId() == this->problem_list[j].getItem(k).getId()){
-                        this->problem_list[j].getItem(k).setWorkTime(loaded_problem.getItem(n).getWorkTime());
-                    }
+    for(size_t j = 0; j < this->machines; j++){
+        for(size_t k = 0; k < this->problem_list[j].getSize(); k++){
+            for(size_t n = 0; n < size_t(problem_amount); n++){
+                if(loaded_problem.getItem(n).getId() == this->problem_list[j].getItem(k).getId()){
+                    this->problem_list[j].getItem(k).setWorkTime(loaded_problem.getItem(n).getWorkTime());
                 }
             }
         }
-
-        std::cout << "----------------FPTAS algorithm------------------" << std::endl;
-        this->displayMachinesResult();
-        this->clearInstance();
     }
+
+    std::cout << "----------------FPTAS algorithm------------------" << std::endl;
+    this->displayMachinesResult();
+    this->clearInstance();
 }
 
 template<class Problem>
