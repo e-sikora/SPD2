@@ -39,7 +39,6 @@ void Instance<Problem>::divideTasks(std::vector<int> tasks, Problem loaded_probl
             }
         }
     }
-
 }
 
 template<class Problem>
@@ -131,7 +130,6 @@ void Instance<Problem>::LSAandLPTCore(Problem loaded_problem){
     size_t problem_amount = loaded_problem.getSize();
     int less_burdened;
 
-
     for(size_t i = 0; i < problem_amount; i++){
         less_burdened = this->lessBurdenedMachine();
         this->problem_list[less_burdened].pushBack(loaded_problem.getItem(i));
@@ -163,10 +161,9 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
     int one_machine_work_time = loaded_problem.workTime();
     int columns = floor(one_machine_work_time/2)+1;
     int rows = loaded_problem.getSize()+1; 
-    int last_row_with_one = rows;
     std::vector<std::vector<int>> divide_matrix(rows, std::vector<int>(columns)); 
-    std::vector<int> divided_tasks (int(loaded_problem.getSize()), machines);
-    bool first_iteration = true;
+    std::vector<int> divided_tasks (int(loaded_problem.getSize()), 1);
+    int counter = columns - 1;
 
     for(int i = 0; i < rows; i++) {
         for(int j = 0; j < columns; j++) {
@@ -181,40 +178,22 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
 
     for(int i = 1; i < rows; i++) {
         for(int j = 1; j < columns; j++) {
-            if(divide_matrix[i-1][j]||((j >= loaded_problem.getItem(i-1).getWorkTime()) 
+            if(divide_matrix[i-1][j] == 1 || ((j >= loaded_problem.getItem(i-1).getWorkTime()) 
             && divide_matrix[i-1][j-loaded_problem.getItem(i-1).getWorkTime()] == 1)){
                 divide_matrix[i][j] = 1;
             }
         }
     }
 
-    for(int j = columns-1; j >= 1; j--) {
-        if(first_iteration){
-            for(int i = 1; i < rows; i++) {
-                if(divide_matrix[i][j] == 1){
-                    divided_tasks[i-1] = 0;
-                    last_row_with_one = i;
-                    first_iteration = false;
-                    break;
-                }
-            }
+    while(counter != 0){
+        int taken_row = 0;
+        while(divide_matrix[taken_row][counter] != 1){
+            taken_row ++;
         }
 
-        else{
-            for(int i = 1; i < rows; i++) {
-                if(divide_matrix[i][j] == 1 && last_row_with_one > i){
-                    divided_tasks[i-1] = 0;
-                    last_row_with_one = i;
-                    break;
-                }
-            }
-        }
-    }
-
-    for (size_t i = 0; i < divided_tasks.size(); ++i) {
-        if(divided_tasks[i] == int(machines)){
-            divided_tasks[i] = 1;
-        }
+        counter -= loaded_problem.getItem(taken_row-1).getWorkTime();
+        divided_tasks[taken_row-1] = 0;
+    
     }
 
     this->divideTasks(divided_tasks, loaded_problem); 
@@ -236,8 +215,6 @@ void Instance<Problem>::dynamicProgramingTwoMachines(Problem loaded_problem, boo
         }
         std::cout << std::endl;
     }
-    
-    
 }
 
 template<class Problem>

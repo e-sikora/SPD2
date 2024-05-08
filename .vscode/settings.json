@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.json": "cpp",
         "vector": "cpp",
         "ratio": "cpp",
         "array": "cpp",
@@ -60,8 +61,10 @@
         "stop_token": "cpp",
         "streambuf": "cpp",
         "thread": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "optional": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 
     
 }

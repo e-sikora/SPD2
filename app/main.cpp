@@ -27,8 +27,8 @@ int main(int argc, char *argv[]) {
   //instance.timeMeasure([&]() { instance.algorithmWrongPTAS(problem); });
   //instance.timeMeasure([&]() { instance.algorithmPTAS(problem); });
   if(problem.getMachines()==2) {
-    instance.timeMeasure([&]() { instance.dynamicProgramingTwoMachines(problem, true, true); });
-    //instance.timeMeasure([&]() { instance.algorithmFPTAS(problem); });
+    instance.timeMeasure([&]() { instance.dynamicProgramingTwoMachines(problem, true, false); });
+    instance.timeMeasure([&]() { instance.algorithmFPTAS(problem); });
   }
   
   return 0;
