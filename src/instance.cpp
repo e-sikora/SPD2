@@ -61,7 +61,7 @@ void Instance<Problem>::displayMachinesResult(){
         std::cout << std::endl;
     }
 
-    std::cout << "Best work time in this order is: " << this->workTime() 
+    std::cout << std::endl << "Best work time in this order is: " << this->workTime() 
     << std::endl << std::endl;
 
 }
@@ -380,7 +380,7 @@ void Instance<Problem>::timeMeasure(std::function<void()> callback) {
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
 
-    std::cout << "Powyższy algorytm wykonywał się: " << duration.count() << "ms" 
+    std::cout << "Required time to comlete above algorithm: " << duration.count() << "ms" 
               << std::endl << std::endl;
 }
 
