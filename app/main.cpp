@@ -10,8 +10,18 @@
 
 #include "instance.h"
 
-int main(int argc, char *argv[]) {
-  if(argc!=2){
+
+/**
+ * @brief Main function of the program.
+ *
+ * @param argc Number of command-line arguments.
+ * @param argv Array of command-line arguments.
+ * @return int Return status of the program.
+ */
+int main(int argc, char *argv[])
+{
+  if (argc != 2)
+  {
     std::cout << "Błędne wywołanie programu! Program kończy działanie!" << std::endl;
     exit(EXIT_FAILURE);
   }

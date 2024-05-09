@@ -31,7 +31,9 @@ def run_doxygen():
 
         # Open the index.html file in the default web browser
         index_path = os.path.join(doc_dir, "html", index_file)
+        # browser = webbrowser.get('windows-default')
         webbrowser.open("file://" + index_path)
+        print(index_path)
     else:
         print("Doxyfile not found in the doc directory.")
 

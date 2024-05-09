@@ -20,11 +20,12 @@
  *
  * @tparam Item The type of items in the problem.
  */
-template<class Item>
-class Problem {
+template <class Item>
+class Problem
+{
 private:
     std::vector<Item> main_list; /**< The main list of items. */
-    int list_size; /**< The size of the list. */
+    int list_size;               /**< The size of the list. */
     int machine_amount;
 
 public:
@@ -39,6 +40,10 @@ public:
      */
     size_t getSize();
 
+    /**
+     * @brief Get the number of machines.
+     * @return The number of machines.
+     */
     size_t getMachines();
 
     /**
@@ -66,7 +71,12 @@ public:
      */
     void createOrClearFile(const std::string file_name);
 
-
+    /**
+     * @brief Save the permutation result to a file.
+     * @param best_order The best order of items.
+     * @param best_time The total time for the best order.
+     * @param result_file The name of the file to save the result to.
+     */
     void savePermResult(const std::vector<Item> best_order, const int best_time, std::string result_file);
 
     /**
@@ -83,35 +93,51 @@ public:
      */
     void eraseChosenVectorElement(std::vector<Item> &list, const int serial);
 
-
     /**
      * @brief Measure time for a given function.
      * @param callback The function to measure time for.
      */
     void timeMeasure(std::function<void()> callback);
 
-    void pushBack(Item given_item){this->main_list.push_back(given_item);}
+    /**
+     * @brief Pushes an item to the back of the main list.
+     * @param given_item The item to push.
+     */
+    void pushBack(Item given_item) { this->main_list.push_back(given_item); }
+    /**
+     * @brief Increments the size of the main list.
+     */
+    void listSizeIncrement() { this->list_size++; }
+    /**
+     * @brief Decrements the size of the main list.
+     */
+    void listSizeDecrement() { this->list_size--; }
 
-    void listSizeIncrement(){this->list_size++;}
-
-    void listSizeDecrement(){this->list_size--;}
-
-    void listSizeZero(){this->list_size = 0;}
-
-    void mainListClear(){this->main_list.clear();}
-
+    /**
+     * @brief Sets the size of the main list to zero.
+     */
+    void listSizeZero() { this->list_size = 0; }
+    /**
+     * @brief Clears the main list.
+     */
+    void mainListClear() { this->main_list.clear(); }
+    /**
+     * @brief Sorts the main list by work time.
+     */
     void workTimeSort();
-
+    /**
+     * @brief Divides the work time of each item in the main list by a specified divider.
+     * @param divider The value by which to divide the work time.
+     */
     void divideElement(const int divider);
 
-    //int workTime();
+    // int workTime();
 };
 
 // #ifdef ENABLE_DOCTEST_IN_LIBRARY
 
 // #include "doctest/doctest.h"
 // #include "item.h"
-
 
 // TEST_CASE("Problem class tests") {
 //     int workTime_forTestSet = 62;
@@ -186,7 +212,6 @@ public:
 //         CHECK(problem.workTime(true) == workTime_forTestSet);
 //     };
 // }
-
 
 // TEST_CASE("permutationSort") {
 //     Problem<Item<int>> problem;
