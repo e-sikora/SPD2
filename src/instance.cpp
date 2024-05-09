@@ -318,7 +318,9 @@ void Instance<Problem>::algorithmPTAS(Problem loaded_problem){
     int problem_amount = loaded_problem.getSize(), first_divide = 0;
 
     //Choose PTAS parametr
-    float divider = 0.5;
+    int numerator = 3;
+    int denumerator = 4;
+    double divider = static_cast<double> (numerator) / denumerator;
     first_divide = floor(problem_amount * divider);
 
     Problem first_divide_list;
@@ -348,7 +350,7 @@ void Instance<Problem>::algorithmFPTAS(Problem loaded_problem){
     Problem helper = loaded_problem;
 
     //Chose FPTAS parametr
-    int divider = 2;
+    int divider = 4;
 
     helper.divideElement(divider);
 
